@@ -143,7 +143,12 @@ function handleRouteChange() {
   updateNavLinksVisibility();
 
   const pageRenderer = routes[route] || routes['/'];
-  pageRenderer();
+
+  if (document.startViewTransition) {
+    document.startViewTransition(() => pageRenderer());
+  } else {
+    pageRenderer();
+  }
 }
 
 // =================== EVENT LISTENERS ===================
